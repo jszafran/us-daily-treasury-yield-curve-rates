@@ -5,7 +5,7 @@ import bs4
 import pandas as pd
 from simple_settings import settings
 
-TENORS = [
+TENORS = (
     "BC_1MONTH",
     "BC_2MONTH",
     "BC_3MONTH",
@@ -18,9 +18,9 @@ TENORS = [
     "BC_10YEAR",
     "BC_20YEAR",
     "BC_30YEAR",
-]
+)
 
-DF_COLUMNS = [
+DF_COLUMNS = (
     "date",
     "1m",
     "2m",
@@ -34,7 +34,7 @@ DF_COLUMNS = [
     "10y",
     "20y",
     "30y",
-]
+)
 
 
 def parse_xml_row(xml_tag: bs4.element.Tag) -> List:
