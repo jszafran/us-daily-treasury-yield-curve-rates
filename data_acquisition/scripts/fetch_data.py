@@ -1,3 +1,6 @@
+import sys
+from typing import Optional
+
 import requests
 from simple_settings import settings
 
@@ -8,9 +11,11 @@ URL = (
 REQUEST_TIMEOUT = 2
 
 
-def main():
-    # TODO: argparse arguments handling for settings years range
-    years = range(2021, 2021)
+def main(year_start_: int, year_end_: Optional[int] = None):
+    if not year_end_:
+        year_end_ = year_start_ + 1
+
+    years = range(year_start_, year_end_)
 
     for year in years:
         url = URL.format(year=year)
@@ -24,4 +29,22 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    # TODO: Think about switching to argparse?
+    try:
+        year_start = int(sys.argv[1])
+    except IndexError:
+        print("Please provide year to be fetched. Quitting script.")
+        sys.exit(1)
+    except ValueError:
+        print(f"Parsing {sys.argv[1]} val to int failed. Quitting script.")
+        sys.exit(1)
+
+    try:
+        year_end = int(sys.argv[2])
+    except IndexError:
+        year_end = None
+    except ValueError:
+        print(f"Parsing {sys.argv[2]} val to int failed. Quitting script.")
+        sys.exit(1)
+
+    main(year_start, year_end)
