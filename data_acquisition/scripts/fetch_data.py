@@ -13,9 +13,9 @@ REQUEST_TIMEOUT = 2
 
 def main(year_start_: int, year_end_: Optional[int] = None):
     if not year_end_:
-        year_end_ = year_start_ + 1
+        year_end_ = year_start_
 
-    years = range(year_start_, year_end_)
+    years = range(year_start_, year_end_ + 1)
 
     for year in years:
         url = URL.format(year=year)
